@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+        <title>aklsh@firefox &gt; newtab</title>
+
+        <style>
+            html {
+                align-items: center;
+                background-color: #2E3440;
+                color: #D8DEE9;
+                display: flex;
+                font: 15px/1 Fira Code, monospace;
+                height: 100%;
+                justify-content: center;
+            }
+
+            body {
+                background-color: #434C5E;
+                color: #D8DEE9;
+                line-height: 1.2em;
+                display: flex;
+                flex-direction: column;
+                height: 30em;
+                width: 60em;
+                padding: 2.2em;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            p span {
+                color: #81A1C1;
+                cursor: default;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            a:focus,
+            a:hover {
+                color: #ECEFF4;
+                text-decoration: underline;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                cursor: default;
+            }
+
+            nav {
+                display: grid;
+                grid-template-columns: auto auto auto auto auto auto;
+                padding: 1.4em 0;
+            }
+
+            ul:nth-child(5n) li:first-child {
+                color: #B48EAD;
+            }
+            ul:nth-child(5n + 1) li:first-child {
+                color: #BF616A;
+            }
+
+            ul:nth-child(5n + 2) li:first-child {
+                color: #D08770;
+            }
+
+            ul:nth-child(5n + 3) li:first-child {
+                color: #EBCB8B;
+            }
+
+            ul:nth-child(5n + 4) li:first-child {
+                color: #A3BE8C;
+            }
+
+            li:first-child {
+                font-weight: bold;
+            }
+
+            li:last-child {
+                margin: 0 0 1em;
+            }
+
+            input,
+            textarea,
+            input {
+                background: none;
+                color: #434C5E;
+                width: 6px;
+                font: 16px/1 Fira Code, monospace;
+                outline: 1px;
+                border: 1px;
+                border-radius: 0;
+                border-bottom: 1px solid #81A1C1;
+            }
+            textarea:focus,
+            input:focus {
+                color: #D8DEE9;
+                outline: 1px;
+                border: 1px;
+                width: 50%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <p><span>web</span> &gt; ls --favourites</p>
+        <nav>
+            <ul>
+                <li>writing</li>
+                <li><a href="https://docs.google.com/">gSuite</a></li>
+                <li><a href="https://www.overleaf.com/project">overleaf</a></li>
+            </ul>
+            <ul>
+                <li>code</li>
+                <li><a href="https://github.com">github</a></li>
+                <li><a href="https://www.stackoverflow.com">stackoverflow</a></li>
+            </ul>
+            <ul>
+                <li>insti</li>
+                <li><a href="https://netaccess.iitm.ac.in">prox</a></li>
+                <li><a href="https://courses.iitm.ac.in">acads</a></li>
+            </ul>
+            <ul>
+                <li>papers</li>
+                <li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">ieeeXplore</a></li>
+                <li><a href="https://www.sci-hub.tw">sci-hub</a></li>
+            </ul>
+            <ul>
+                <li>mail</li>
+                <li><a href="https://mail.google.com/mail/u/1/#inbox">personal</a></li>
+                <li><a href="https://mail.google.com/mail/u/0/#inbox">school</a></li>
+            </ul>
+            <ul>
+                <li>subreddits</li>
+                <li><a href="https://www.reddit.com/r/vim/">r/vim</a></li>
+                <li><a href="https://www.reddit.com/r/androidthemes/">r/androidthemes</a></li>
+                <li><a href="https://www.reddit.com/r/unixporn/">r/up</a></li>
+            </ul>
+        </nav>
+
+        <form method="get" action="https://www.google.com/search?q=">
+            <p><span>web &gt; search &gt; </span><input type="text" name="q" spellcheck="false" placeholder=" arguments" autofocus></p>
+        </form>
+    </body>
+
+</html>
