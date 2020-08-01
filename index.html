@@ -89,6 +89,28 @@
                 margin: 0 0 1em;
             }
 
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #BF616A;
+            }
+            .notesList::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .notesList::-webkit-scrollbar-track-piece:start {
+                background: transparent;
+                margin-top: 5px;
+            }
+            .notesList::-webkit-scrollbar-track-piece:end {
+                background: transparent;
+                margin-bottom: 5px;
+            }
+
             input,
             textarea {
                 background: #2E3440;
@@ -108,14 +130,18 @@
                 width: 80%;
                 border-bottom: 1px solid #81A1C1;
             }
+            .notesList {
+                height: 200px;
+                overflow-y: auto;
+            }
             .notes {
                 background-color: #2E3440;
                 font: 16px/1 Fira Code, monospace;
                 color: white;
                 border: 2px solid #434C5E;
-                width: 100%;
+                width: 98%;
                 padding: 10px 0px;
-                margin: 5px 2px;
+                margin: 5px 0px;
                 transition-duration: 0.1s;
                 outline: none;
             }
@@ -170,7 +196,7 @@
         <div id="notepad" style="padding-top:2em">
             <div id="leftColumn" style="width:25%;float:left">
                 <div id="newNote" style="height:40px">hhh</div>
-                <div id="newNote" style="height:200px;overflow-y:auto">
+                <div id="noteslist" class="notesList">
                     <button class="notes">B1</button>
                     <button class="notes">B2</button>
                     <button class="notes">B3</button>
@@ -180,6 +206,15 @@
             </div>
             <div id="rightColumn" style="width:73%;float:left;padding-left:2%">Right</div>
         </div>
+        <script type="text/javascript">
+            var rules = document.styleSheets[1].cssRules;
+            var colors = ['#B48EAD', '#BF616A', '#D08770', '#EBCB8B', '#A3BE8C']
+            for (var i = 0; i < rules.length; i++)
+                if (rules[i].selectorText == '::-webkit-scrollbar-thumb'){
+                    rules[i].style.background = colors[Math.floor(Math.random() * colors.length)];
+                    break;
+                }
+        </script>
     </body>
 
 </html>
