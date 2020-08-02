@@ -196,7 +196,7 @@
         <form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
             <p><span>web &gt; search &gt; </span><input class="form-control search" name="q" placeholder="query"  type="text" autofocus></p>
         </form>
-        <div id="notepad" style="padding-top:2em">
+        <div id="notepad" style="margin-top:2.5em">
             <div id="leftColumn" style="width:25%;float:left">
                 <div id="newNote" style="height:40px">
                     <button class="notes" style="width:20%;height:30px;padding:5px;text-align:center">+</button>
@@ -211,7 +211,7 @@
                 </div>
             </div>
             <div id="rightColumn" style="width:73%;float:left;padding-left:2%">
-                <iframe id="noteFrame" src="frame.html" height=227px width=90% style="margin-top:4px;border:2px solid #434C5E"></iframe>
+                <iframe id="noteFrame" src="mm.html" height=227px width=90% style="margin-top:4px;border:2px solid #434C5E;display:block"></iframe>
             </div>
         </div>
         <script type="text/javascript">
@@ -223,7 +223,7 @@
                     rules[i].style.background = '#'+randomColor;
                     break;
                 }
-            document.getElementById('noteFrame').src = "frame.html?" + randomColor;
+            document.getElementById('noteFrame').src += "?" + randomColor;
         </script>
     </body>
 
