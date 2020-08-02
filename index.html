@@ -140,10 +140,13 @@
                 color: white;
                 border: 2px solid #434C5E;
                 width: 98%;
-                padding: 10px 0px;
+                height: 40px;
+                padding: 10px 10px;
                 margin: 5px 0px;
                 transition-duration: 0.1s;
                 outline: none;
+                text-align: left;
+                overflow: hidden;
             }
             .notes:hover,
             active,
@@ -195,7 +198,10 @@
         </form>
         <div id="notepad" style="padding-top:2em">
             <div id="leftColumn" style="width:25%;float:left">
-                <div id="newNote" style="height:40px">hhh</div>
+                <div id="newNote" style="height:40px">
+                    <button class="notes" style="width:20%;height:30px;padding:5px;text-align:center">+</button>
+                    <span style="margin-left:20px">Quick notes</span>
+                </div>
                 <div id="noteslist" class="notesList">
                     <button class="notes">B1</button>
                     <button class="notes">B2</button>
@@ -204,16 +210,20 @@
                     <button class="notes">B5</button>
                 </div>
             </div>
-            <div id="rightColumn" style="width:73%;float:left;padding-left:2%">Right</div>
+            <div id="rightColumn" style="width:73%;float:left;padding-left:2%">
+                <iframe id="noteFrame" src="frame.html" height=227px width=90% style="margin-top:4px;border:2px solid #434C5E"></iframe>
+            </div>
         </div>
         <script type="text/javascript">
             var rules = document.styleSheets[1].cssRules;
-            var colors = ['#B48EAD', '#BF616A', '#D08770', '#EBCB8B', '#A3BE8C']
+            var colors = ['B48EAD', 'BF616A', 'D08770', 'EBCB8B', 'A3BE8C']
+            randomColor = colors[Math.floor(Math.random() * colors.length)];
             for (var i = 0; i < rules.length; i++)
                 if (rules[i].selectorText == '::-webkit-scrollbar-thumb'){
-                    rules[i].style.background = colors[Math.floor(Math.random() * colors.length)];
+                    rules[i].style.background = '#'+randomColor;
                     break;
                 }
+            document.getElementById('noteFrame').src = "frame.html?" + randomColor;
         </script>
     </body>
 
