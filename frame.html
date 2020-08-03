@@ -19,12 +19,14 @@
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 			color: white;
 			display: block;
+			margin-top: -20px;
 		}
 		.editor {
             font: 16px/1 Fira Code, monospace;
 			color: white;
 			outline: none;
 			display: none;
+			white-space: pre;
 		}
         .window {
         	width: 100%;
@@ -43,7 +45,7 @@
             outline: none;
             border: 2px solid #434C5E;
             padding: 5px;
-            margin-top: -10px;
+            margin-top: 10px;
 			z-index: 2;
 			right: 10px;
 			display: block;
@@ -74,6 +76,12 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 	<script>
+		function parse(input) {
+			let lines = input.innerText;
+			return lines;
+		}
+	</script>
+	<script>
 		function toEdit() {
 			document.getElementById('editButton').style.display = 'none';
 			document.getElementById('saveButton').style.display = 'block';
@@ -81,9 +89,8 @@
 			document.getElementById('editor').style.display = 'block';
 		}
 		function toSave() {
-			let mk = document.getElementById('editor').innerHTML
-			console.log(mk);
-			document.getElementById('markdown').innerHTML = marked(mk)
+			var mk = document.getElementById('editor');
+			document.getElementById('markdown').innerHTML = marked(parse(mk));
 			document.getElementById('editButton').style.display = 'block';
 			document.getElementById('saveButton').style.display = 'none';
 			document.getElementById('markdown').style.display = 'block';
