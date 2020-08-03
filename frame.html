@@ -1,8 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<title>iframe</title>
-	<style>
+	<meta charset="utf-8"/>
+	<title>Marked in the browser</title>
+	<style type="text/css">
+		.markdown {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+			color: white;
+		}
 		::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -18,20 +23,48 @@
         	height: 300px;
         	box-shadow: inset 0 0 2px yellowgreen;
         }
+		a {
+			color: black;
+		}
+		.bOverlay {
+			position: fixed;
+            background-color: rgba(46, 52, 64, 0.5);
+            font: 16px/1 Fira Code, monospace;
+            color: white;
+            transition-duration: 0.1s;
+            outline: none;
+            border: 2px solid #434C5E;
+            padding: 5px;
+			z-index: 2;
+			margin-top: -10px;
+			right: 10px;
+		}
+		.bOverlay:hover,
+		active {
+			background-color: #434C5E;
+		}
 	</style>
 </head>
 <body>
-	<div class="window">
-		d		
+	<div>
+		<button class="bOverlay">Edit</button>
 	</div>
+	<div id="content" class="markdown"></div>
 	<script>
 		var randomColor = window.location.search.substring(1);
 		var rules = document.styleSheets[0].cssRules;
-            for (var i = 0; i < rules.length; i++)
-                if (rules[i].selectorText == '::-webkit-scrollbar-thumb'){
+            for (var i = 0; i < rules.length; i++) {
+                if (rules[i].selectorText == '::-webkit-scrollbar-thumb')
                     rules[i].style.background = '#'+randomColor;
-                    break;
+                if (rules[i].selectorText == 'a') {
+                	rules[i].style.color = '#' + randomColor;
                 }
+            }
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<script>
+    	document.getElementById('content').innerHTML =
+    	marked('# Marked in the browser\n- Rendered by *arked* [link](g).\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh\n- hhh');
+  	</script>
 </body>
 </html>
