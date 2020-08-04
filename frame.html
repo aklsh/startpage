@@ -128,7 +128,14 @@
 			var mk = document.getElementById('editor');
 
 			let text = mk.innerText;
-			noteData[noteKey].name = text.split('\n', 1)[0].trimLeft('# ');
+			heading = text.split('\n', 1)[0];
+			for (var i = 0; i < heading.length; i++)
+				if (heading[i] !== '#')
+					if (heading[i] !== ' ') {
+						heading = heading.slice(i);
+						break;
+					}
+			noteData[noteKey].name = heading;
 			noteData[noteKey].content = text;
 			localStorage.setItem('noteData', JSON.stringify(noteData));
 
