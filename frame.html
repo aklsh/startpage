@@ -138,8 +138,8 @@
 			noteData[noteKey].name = heading;
 			noteData[noteKey].content = text;
 			localStorage.setItem('noteData', JSON.stringify(noteData));
+			setTimeout(function(){window.top.postMessage('refresh', '*');}, 0);
 
-			window.top.postMessage('refresh', '*');
 			document.getElementById('markdown').innerHTML = md.render(text);
 			document.getElementById('editButton').style.display = 'block';
 			document.getElementById('saveButton').style.display = 'none';
