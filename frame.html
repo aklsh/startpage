@@ -21,6 +21,13 @@
 		code {
 			background-color: rgba(0, 0, 0, 0.2);
 			padding: 1px 4px 2px 4px;
+			font-size: 15px;
+		}
+		pre {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+		pre code {
+			background-color: transparent;
 		}
 		blockquote {
 			color: rgba(255, 255, 255, 0.7);
@@ -30,7 +37,6 @@
 		}
 		table {
 			border-collapse: collapse;
-			margin-left: 10px;
 		}
 		th, td {
 			border: 1px solid rgb(255, 255, 255, 0.8);
@@ -97,7 +103,7 @@
 			if (arg[0] == 'color') 
 				randomColor = '#'+arg[1];
 			if (arg[0] == 'noteId')
-				noteId = arg[1]
+				noteKey = arg[1]
 		}
 		var rules = document.styleSheets[0].cssRules;
             for (var i = 0; i < rules.length; i++) {
@@ -112,14 +118,7 @@
 	<script src="markdown-it-emoji.min.js"></script>
 	<script>
 		var md = window.markdownit().use(window.markdownitEmoji);
-		function parse(input) {
-			let lines = input.innerText;
-			let word = lines.split('\n', 1)[0];
-			console.log(word.trimLeft(' #'));
-			return lines;
-		}
 		function toEdit() {
-			console.log(document.getElementById('markdown').innerHTML);
 			document.getElementById('editButton').style.display = 'none';
 			document.getElementById('saveButton').style.display = 'block';
 			document.getElementById('markdown').style.display = 'none';
@@ -128,7 +127,12 @@
 		function toSave() {
 			var mk = document.getElementById('editor');
 
-			document.getElementById('markdown').innerHTML = md.render(parse(mk));
+			let text = mk.innerText;
+			noteData[noteKey].name = text.split('\n', 1)[0].trimLeft('# ');
+			noteData[noteKey].content = text;
+			localStorage.setItem('noteData', JSON.stringify(noteData));
+
+			document.getElementById('markdown').innerHTML = md.render(text);
 			document.getElementById('editButton').style.display = 'block';
 			document.getElementById('saveButton').style.display = 'none';
 			document.getElementById('markdown').style.display = 'block';
@@ -136,8 +140,10 @@
 		}
 	</script>
 	<script>
-    	document.getElementById('markdown').innerHTML =
-    	md.render('# New note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - Supports markdown\n> This is a quote (very big quote) dnslfns;djfnjs dsfjk ndkjsfk bkdsfb lkjnl kfjnsjkdn lkfsdkl fnjsdkn\n\n|H1|H1|\n|--|--|\n|c1|c2|\n\n`A line of code`\n\nAn emoji: :warning:\n');
+		var noteData = JSON.parse(localStorage.getItem('noteData'));
+    	document.getElementById('editor').innerHTML = noteData[noteKey].content;
+    	toEdit();
+    	toSave();
   	</script>
 </body>
 </html>

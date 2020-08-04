@@ -151,6 +151,7 @@
                 width:80%;
                 overflow-x:hidden;
                 padding:2px;
+                cursor: pointer;
             }
             .notesList div:hover,
             active {
@@ -218,9 +219,6 @@
                     <span style="margin-left:20px">Quick notes</span>
                 </div>
                 <div id="noteslist" class="notesList">
-                    <div><span>B2jl fdjlsh jhkjfkfdsf</span><button>x</button></div>
-                    <div>B4</div>
-                    <div>B5</div>
                 </div>
             </div>
             <div id="rightColumn" style="width:73%;float:left;padding-left:2%">
@@ -239,16 +237,34 @@
             document.getElementById('noteFrame').src += "?color=" + randomColor;
         </script>
         <script>
-            function getButton(noteId) {
-                noteName = '';
-                return '<div><span onclick="openNote(' + String(noteId) + ')">' + noteName + '</span><button onclick="delNote(' + String(noteId) + ')">x</button></div>';
+            var noteData = {}
+            var currentlyOpen = {}
+            function addButtons(refresh) {
+                if (!('noteData' in localStorage) || localStorage.noteData.length === 2) {
+                    let noteData = {
+                        note0: {name:'Quick note', content:'# Quick note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - Supports markdown\n - [For more info](https://github.com/mukheshpugal/startpage)\n> This is a quote\n\nThe following is a table:\n|Title 1|Title 2|\n|--|--|\n|content|some other content|\n\n`A line of code`\n\nHere is an emoji for you: :heart:. Find more [here](https://gist.github.com/rxaviers/7360908).\n'}
+                    }
+                    localStorage.setItem('noteData', JSON.stringify(noteData));
+                }
+                noteData = JSON.parse(localStorage.getItem('noteData'));
+                let buttons = '';
+                Object.keys(noteData).forEach((key) => {
+                    buttons += '<div><span onclick="openNote(\''+String(key)+'\')">'+noteData[key].name+'</span><button onclick="delNote(\''+String(key)+'\')">x</button></div>';
+                })
+                document.getElementById('noteslist').innerHTML = buttons;
+                if (refresh)
+                    openNote(Object.keys(noteData)[0]);
             }
-            function openNote(noteId) {
-                document.getElementById('noteFrame').src = document.getElementById('noteFrame').src.split('&')[0] + '&noteId=' + String(noteId);
+            function openNote(key) {
+                document.getElementById('noteFrame').src = document.getElementById('noteFrame').src.split('&')[0] + '&noteId=' + String(key);
+                currentlyOpen = key;
             }
-            function delNote(noteId) {
-                
+            function delNote(key) {
+                delete noteData[key];
+                localStorage.setItem('noteData', JSON.stringify(noteData));
+                addButtons((currentlyOpen == key));
             }
+            addButtons(true);
         </script>
     </body>
 
