@@ -131,23 +131,42 @@
                 height: 200px;
                 overflow-y: auto;
             }
+            .notesList div,
             .notes {
                 background-color: #2E3440;
                 font: 16px/1 Fira Code, monospace;
                 color: white;
                 border: 2px solid #434C5E;
-                width: 98%;
-                height: 40px;
+                width: 85%;
                 padding: 10px 10px;
                 margin: 5px 0px;
                 transition-duration: 0.1s;
                 outline: none;
                 text-align: left;
                 overflow: hidden;
+                white-space: nowrap;
+            }
+            .notesList span {
+                display:inline-block;
+                width:80%;
+                overflow-x:hidden;
+                padding:2px;
+            }
+            .notesList div:hover,
+            active {
+                background-color: #434C5E;
             }
             .notes:hover,
             active {
                 background-color: #434C5E;
+            }
+            .notesList button {
+                outline: none;
+                background-color: transparent;
+                float: right;
+                color: white;
+                z-index: 2;
+                border: none;
             }
         </style>
     </head>
@@ -199,11 +218,9 @@
                     <span style="margin-left:20px">Quick notes</span>
                 </div>
                 <div id="noteslist" class="notesList">
-                    <button class="notes">B1</button>
-                    <button class="notes">B2</button>
-                    <button class="notes">B3</button>
-                    <button class="notes">B4</button>
-                    <button class="notes">B5</button>
+                    <div><span>B2jl fdjlsh jhkjfkfdsf</span><button>x</button></div>
+                    <div>B4</div>
+                    <div>B5</div>
                 </div>
             </div>
             <div id="rightColumn" style="width:73%;float:left;padding-left:2%">
@@ -213,13 +230,25 @@
         <script type="text/javascript">
             var rules = document.styleSheets[1].cssRules;
             var colors = ['B48EAD', 'BF616A', 'D08770', 'EBCB8B', 'A3BE8C']
-            randomColor = colors[Math.floor(Math.random() * colors.length)];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
             for (var i = 0; i < rules.length; i++)
                 if (rules[i].selectorText == '::-webkit-scrollbar-thumb'){
                     rules[i].style.background = '#'+randomColor;
                     break;
                 }
-            document.getElementById('noteFrame').src += "?" + randomColor;
+            document.getElementById('noteFrame').src += "?color=" + randomColor;
+        </script>
+        <script>
+            function getButton(noteId) {
+                noteName = '';
+                return '<div><span onclick="openNote(' + String(noteId) + ')">' + noteName + '</span><button onclick="delNote(' + String(noteId) + ')">x</button></div>';
+            }
+            function openNote(noteId) {
+                document.getElementById('noteFrame').src = document.getElementById('noteFrame').src.split('&')[0] + '&noteId=' + String(noteId);
+            }
+            function delNote(noteId) {
+                
+            }
         </script>
     </body>
 

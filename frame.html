@@ -15,27 +15,52 @@
         ::-webkit-scrollbar-thumb {
             background: #000;
         }
+		a {
+			color: black;
+		}
+		code {
+			background-color: rgba(0, 0, 0, 0.2);
+			padding: 1px 4px 2px 4px;
+		}
+		blockquote {
+			color: rgba(255, 255, 255, 0.7);
+			padding-left: 10px;
+			margin-left: 5px;
+			border-left: 4px solid rgba(255, 255, 255, 0.7);
+		}
+		table {
+			border-collapse: collapse;
+			margin-left: 10px;
+		}
+		th, td {
+			border: 1px solid rgb(255, 255, 255, 0.8);
+			padding: 4px;
+		}
+		h1, h2 {
+			border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+			padding-bottom: 5px;
+			margin-bottom: -5px;
+		}
 		.markdown {
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 			color: white;
 			display: block;
 			margin-top: -20px;
+			width: 100%;
+			word-wrap: break-word;
 		}
 		.editor {
             font: 16px/1 Fira Code, monospace;
 			color: white;
 			outline: none;
 			display: none;
-			white-space: pre;
+			white-space: pre-wrap;
 		}
         .window {
         	width: 100%;
         	height: 300px;
         	box-shadow: inset 0 0 2px yellowgreen;
         }
-		a {
-			color: black;
-		}
 		.bOverlay {
 			position: fixed;
             background-color: rgba(46, 52, 64, 0.5);
@@ -64,25 +89,37 @@
 	<div id="editor" class="editor" contenteditable="true"># Edit me</div>
 	<div id="markdown" class="markdown"></div>
 	<script>
-		var randomColor = window.location.search.substring(1);
+		var args = window.location.search.substring(1).split('&');
+		var randomColor = '#000';
+		var noteId = 0;
+		for (var i = 0; i < args.length; i++) {
+			var arg = args[i].split('=');
+			if (arg[0] == 'color') 
+				randomColor = '#'+arg[1];
+			if (arg[0] == 'noteId')
+				noteId = arg[1]
+		}
 		var rules = document.styleSheets[0].cssRules;
             for (var i = 0; i < rules.length; i++) {
                 if (rules[i].selectorText == '::-webkit-scrollbar-thumb')
-                    rules[i].style.background = '#'+randomColor;
+                    rules[i].style.background = randomColor;
                 if (rules[i].selectorText == 'a') {
-                	rules[i].style.color = '#' + randomColor;
+                	rules[i].style.color = randomColor;
                 }
             }
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<script src="markdown-it.min.js"></script>
+	<script src="markdown-it-emoji.min.js"></script>
 	<script>
+		var md = window.markdownit().use(window.markdownitEmoji);
 		function parse(input) {
 			let lines = input.innerText;
+			let word = lines.split('\n', 1)[0];
+			console.log(word.trimLeft(' #'));
 			return lines;
 		}
-	</script>
-	<script>
 		function toEdit() {
+			console.log(document.getElementById('markdown').innerHTML);
 			document.getElementById('editButton').style.display = 'none';
 			document.getElementById('saveButton').style.display = 'block';
 			document.getElementById('markdown').style.display = 'none';
@@ -90,7 +127,8 @@
 		}
 		function toSave() {
 			var mk = document.getElementById('editor');
-			document.getElementById('markdown').innerHTML = marked(parse(mk));
+
+			document.getElementById('markdown').innerHTML = md.render(parse(mk));
 			document.getElementById('editButton').style.display = 'block';
 			document.getElementById('saveButton').style.display = 'none';
 			document.getElementById('markdown').style.display = 'block';
@@ -99,7 +137,7 @@
 	</script>
 	<script>
     	document.getElementById('markdown').innerHTML =
-    	marked('# New note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - Supports markdown');
+    	md.render('# New note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - Supports markdown\n> This is a quote (very big quote) dnslfns;djfnjs dsfjk ndkjsfk bkdsfb lkjnl kfjnsjkdn lkfsdkl fnjsdkn\n\n|H1|H1|\n|--|--|\n|c1|c2|\n\n`A line of code`\n\nAn emoji: :warning:\n');
   	</script>
 </body>
 </html>
