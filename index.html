@@ -215,7 +215,7 @@
         <div id="notepad" style="margin-top:2.5em">
             <div id="leftColumn" style="width:25%;float:left">
                 <div id="newNote" style="height:40px">
-                    <button class="notes" style="width:20%;height:30px;padding:5px;text-align:center">+</button>
+                    <button class="notes" style="width:20%;height:30px;padding:5px;text-align:center" onclick="newNote()">+</button>
                     <span style="margin-left:20px">Quick notes</span>
                 </div>
                 <div id="noteslist" class="notesList">
@@ -239,6 +239,9 @@
         <script>
             var noteData = {}
             var currentlyOpen = {}
+            function test() {
+                console.log('hi');
+            }
             function addButtons(refresh) {
                 if (!('noteData' in localStorage) || localStorage.noteData.length === 2) {
                     let noteData = {
@@ -255,6 +258,10 @@
                 if (refresh)
                     openNote(Object.keys(noteData)[0]);
             }
+            window.onmessage = function(e){
+                if (e.data == 'refresh')
+                    addButtons(false);
+            }
             function openNote(key) {
                 document.getElementById('noteFrame').src = document.getElementById('noteFrame').src.split('&')[0] + '&noteId=' + String(key);
                 currentlyOpen = key;
@@ -263,6 +270,16 @@
                 delete noteData[key];
                 localStorage.setItem('noteData', JSON.stringify(noteData));
                 addButtons((currentlyOpen == key));
+            }
+            function newNote() {
+                let keys = Object.keys(noteData);
+                var i = 0;
+                while ('note'+String(i) in noteData)
+                    i++;
+                noteData['note'+String(i)] = {name:'New note', content:'# New note'};
+                localStorage.setItem('noteData', JSON.stringify(noteData));
+                addButtons(false);
+                openNote('note'+String(i));
             }
             addButtons(true);
         </script>
