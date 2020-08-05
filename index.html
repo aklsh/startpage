@@ -209,7 +209,7 @@
             </ul>
         </nav>
 
-        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
+        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform">
             <p><span>web &gt; search &gt; </span><input class="form-control search" name="q" placeholder="query"  type="text" autofocus></p>
         </form>
         <div id="notepad" style="margin-top:2.5em">
@@ -245,7 +245,7 @@
             function addButtons(refresh) {
                 if (!('noteData' in localStorage) || localStorage.noteData.length === 2) {
                     let noteData = {
-                        note0: {name:'Quick note', content:'# Quick note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - Supports markdown\n - [For more info](https://github.com/mukheshpugal/startpage)\n> This is a quote\n\nThe following is a table:\n|Title 1|Title 2|\n|--|--|\n|content|some other content|\n\n`A line of code`\n\nHere is an emoji for you: :heart:. Find more [here](https://gist.github.com/rxaviers/7360908).\n'}
+                        note0: {name:'Quick note', content:'# Quick note\n - Press edit button to edit.\n - Press save after editing *(else won\'t be saved)*.\n - All note data is saved offline in your browser.\n - Supports styling with [markdown](https://www.markdownguide.org/).\n - [For more info](https://github.com/mukheshpugal/startpage).\n> This is a quote\n\nThe following is a table:\n|Title 1|Title 2|\n|--|--|\n|content|some other content|\n\n`A line of code`\n\nHere is an emoji for you: :heart:. Find more [here](https://gist.github.com/rxaviers/7360908).\n'}
                     }
                     localStorage.setItem('noteData', JSON.stringify(noteData));
                 }
