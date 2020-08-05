@@ -1,3 +1,35 @@
+if (!('sBrowser' in localStorage)) {
+    var sBrowser, sUsrAg = window.navigator.userAgent;
+
+    if (sUsrAg.indexOf("Firefox") > -1) {
+      sBrowser = "firefox";
+    } else if (sUsrAg.indexOf("SamsungBrowser") > -1) {
+      sBrowser = "samsung";
+    } else if (sUsrAg.indexOf("Opera") > -1 || sUsrAg.indexOf("OPR") > -1) {
+      sBrowser = "opera";
+    } else if (sUsrAg.indexOf("Trident") > -1) {
+      sBrowser = "IE";
+    } else if (sUsrAg.indexOf("Edge") > -1) {
+      sBrowser = "edge";
+    } else if (sUsrAg.indexOf("Chrome") > -1) {
+      sBrowser = "chrome";
+    } else if (sUsrAg.indexOf("Safari") > -1) {
+      sBrowser = "safari";
+    } else {
+      sBrowser = "browser";
+    }
+    localStorage.setItem('sBrowser', sBrowser);
+}
+
+if (!('sUser' in localStorage)) {
+    var sUser = prompt("Enter your name");
+    if (sUser == null)
+        sUser = '';
+    localStorage.setItem('sUser', sUser);
+}
+
+document.title = localStorage.getItem('sUser')+'@'+localStorage.getItem('sBrowser')+' > newtab';
+
 var rules = document.styleSheets[2].cssRules;
 var colors = ['B48EAD', 'BF616A', 'D08770', 'EBCB8B', 'A3BE8C']
 var randomColor = colors[Math.floor(Math.random() * colors.length)];
