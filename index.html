@@ -2,9 +2,7 @@
 <html>
 
     <head>
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-
-        <title>pugal@chrome &gt; newtab</title>
+        <title>aklsh@firefox &gt; newtab</title>
 
         <style>
             html {
@@ -12,20 +10,20 @@
                 background-color: #434C5E;
                 color: #D8DEE9;
                 display: flex;
-                font: 15px/1 Fira Code, monospace;
+                flex-direction: column;
+                font-family: Fira Code, monospace;
                 height: 100%;
                 justify-content: center;
+                font-size: calc(10px + 0.6vw);
             }
 
             body {
                 background-color: #2E3440;
                 color: #D8DEE9;
                 line-height: 1.2em;
-                display: flex;
-                flex-direction: column;
-                height: 30em;
-                width: 60em;
-                padding: 2.2em;
+                height: 65%;
+                width: 90%;
+                padding: 2em;
             }
 
             p {
@@ -51,15 +49,16 @@
 
             ul {
                 list-style: none;
-                margin: 0;
-                padding: 0;
+                margin: 1px;
+                padding: 1px;
                 cursor: default;
+                font-size: 90%;
             }
 
             nav {
                 display: grid;
                 grid-template-columns: auto auto auto auto auto auto;
-                padding: 1.4em 0;
+                padding: 1.5em 0em;
             }
 
             ul:nth-child(5n) li:first-child {
@@ -112,8 +111,8 @@
             textarea {
                 background: #2E3440;
                 color: #81A1C1;
-                width: 80%;
-                font: 16px/1 Fira Code, monospace;
+                width: 78%;
+                font: 95% Fira Code, monospace;
                 outline: 10px;
                 border: 1px;
                 border-radius: 0px;
@@ -124,7 +123,7 @@
                 color: #D8DEE9;
                 outline: 10px;
                 border: 1px;
-                width: 80%;
+                width: 78%;
                 border-bottom: 1px solid #81A1C1;
             }
             .notesList {
@@ -173,7 +172,7 @@
     </head>
 
     <body>
-        <p><span>web</span> &gt; ls --favourites</p>
+        <p><span>web &gt;</span> ls --favourites</p>
         <nav>
             <ul>
                 <li>writing</li>
@@ -188,7 +187,8 @@
             <ul>
                 <li>insti</li>
                 <li><a href="https://netaccess.iitm.ac.in">proxy</a></li>
-                <li><a href="https://courses.iitm.ac.in">acads</a></li>
+                <li><a href="https://courses.iitm.ac.in">courses</a></li>
+                <li><a href="https://classroom.google.com/u/0/c/MTQxMzU3MDEzMTcy">classroom</a></li>
             </ul>
             <ul>
                 <li>knowledge</li>
@@ -209,7 +209,7 @@
             </ul>
         </nav>
 
-        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
+        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform">
             <p><span>web &gt; search &gt; </span><input class="form-control search" name="q" placeholder="query"  type="text" autofocus></p>
         </form>
         <div id="notepad" style="margin-top:2.5em">
