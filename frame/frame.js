@@ -11,7 +11,7 @@ for (var i = 0; i < args.length; i++) {
 		noteKey = arg[1]
 }
 
-var rules = document.styleSheets[0].cssRules;
+var rules = document.styleSheets[1].cssRules;
     for (var i = 0; i < rules.length; i++) {
         if (rules[i].selectorText == '::-webkit-scrollbar-thumb')
             rules[i].style.background = randomColor;
