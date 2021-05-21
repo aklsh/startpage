@@ -1,4 +1,4 @@
 Startpage
   - Theme: Terminal-style
-  - Colors: Nord
-  - Search: Google
+  - Colors: Pop-dark
+  - Search: DDG
